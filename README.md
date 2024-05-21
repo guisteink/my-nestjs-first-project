@@ -15,7 +15,7 @@
   - [Qual o tempo para entregar?](#qual-o-tempo-para-entregar)
 - [💻 O Problema](#-o-problema)
   - [Estrutura de um recebível](#estrutura-de-um-recebível)
-  - [Estrutrua de um cedente](#estrutrua-de-um-cedente)
+  - [Estrutura de um cedente](#estrutrua-de-um-cedente)
 - [💾 Back-end](#-back-end)
   - [Nível 1 - Validação](#nível-1---validação)
   - [Nível 2 - Persistência](#nível-2---persistência)
@@ -34,7 +34,7 @@
   - [Nível 4 - Autenticação](#nível-4---autenticação-1)
   - [Nível 5 - Testes](#nível-5---testes)
 
-## ❤️ Bem vindos 
+## ❤️ Bem vindos
 
 Olá, tudo certo?
 
@@ -93,7 +93,7 @@ Os recebíveis são representações digitais de um documento que simula uma dí
 | emissionDate | date          | É a data de emissão do recebível.         |
 | assignor     | string (UUID) | Representa a identificação de um cedente. |
 
-### Estrutrua de um cedente
+### Estrutura de um cedente
 
 | CAMPO    | TIPO          | DESCRIÇÃO                             |
 |----------|---------------|---------------------------------------|
