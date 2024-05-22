@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, HttpStatus, HttpException } from '@nestjs/common';
 import { Assignor } from '../core/entities/assignor.entity';
 import { AssignorRepository } from '../core/repositories/assignor.repository';
 
@@ -8,27 +8,55 @@ export class AssignorController {
 
   @Get()
   async getAll(): Promise<Assignor[]> {
-    return this.assignorRepository.getAll();
+    try {
+      const assignors = await this.assignorRepository.getAll();
+      return assignors;
+    } catch (error) {
+      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Get(':id')
   async get(@Param('id') id: string): Promise<Assignor> {
-    return this.assignorRepository.get(id);
+    try {
+      const assignor = await this.assignorRepository.get(id);
+      if (!assignor) {
+        throw new HttpException('Assignor not found', HttpStatus.NOT_FOUND);
+      }
+      return assignor;
+    } catch (error) {
+      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Post()
   async create(@Body() assignor: Assignor): Promise<Assignor> {
-    return this.assignorRepository.create(assignor);
+    try {
+      return await this.assignorRepository.create(assignor);
+    } catch (error) {
+      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() assignor: Assignor): Promise<void> {
-    return this.assignorRepository.update(id, assignor);
+  async update(@Param('id') id: string, @Body() assignor: Assignor): Promise<any> {
+    try {
+      return await this.assignorRepository.update(id, assignor);
+    } catch (error) {
+      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<Assignor> {
-    const assignor = await this.assignorRepository.get(id);
-    return this.assignorRepository.delete(assignor);
+    try {
+      const assignor = await this.assignorRepository.get(id);
+      if (!assignor) {
+        throw new HttpException('Assignor not found', HttpStatus.NOT_FOUND);
+      }
+      return await this.assignorRepository.delete(assignor);
+    } catch (error) {
+      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
