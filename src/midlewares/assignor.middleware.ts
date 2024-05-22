@@ -2,19 +2,23 @@ import { Injectable, NestMiddleware, HttpStatus, HttpException } from '@nestjs/c
 import { Request, Response, NextFunction } from 'express';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import { CreateReceivableDto } from '../../core/dtos/receivable.dto';
+import { CreateAssignorDto } from '../core/dtos/assignor.dto';
 
 @Injectable()
-export class ReceivableValidatorMiddleware implements NestMiddleware {
+export class AssignorMiddleware implements NestMiddleware {
+
   async use(req: Request, res: Response, next: NextFunction) {
+    console.log("Passou pelo Assignor middleware");
+
     if (req.method === 'POST') {
-      const createReceivableDto = plainToClass(CreateReceivableDto, req.body);
-      const errors = await validate(createReceivableDto);
+      const createAssignorDto = plainToClass(CreateAssignorDto, req.body);
+      const errors = await validate(createAssignorDto);
       if (errors.length > 0) {
         const validationErrors = errors.map(error => Object.values(error.constraints)).flat();
         throw new HttpException(validationErrors, HttpStatus.BAD_REQUEST);
       }
     }
+
     next();
   }
 }

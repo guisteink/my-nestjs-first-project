@@ -3,8 +3,7 @@ import { AppController } from './controllers/app.controller';
 import { PaymentsUseCasesModule } from './use-cases/integrations/payments/payments.module';
 import { AssignorController } from './controllers/assignor.controller';
 import { ReceivableController } from './controllers';
-import { AssignorMiddleware, AssignorValidatorMiddleware } from './midlewares/assignor';
-import { ReceivableMiddleware, ReceivableValidatorMiddleware } from './midlewares/receivable';
+import { AssignorMiddleware, ReceivableMiddleware } from './midlewares';
 
 @Module({
   imports: [PaymentsUseCasesModule],
@@ -18,11 +17,11 @@ import { ReceivableMiddleware, ReceivableValidatorMiddleware } from './midleware
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(AssignorMiddleware, AssignorValidatorMiddleware)
+      .apply(AssignorMiddleware)
       .forRoutes(AssignorController);
 
     consumer
-      .apply(ReceivableMiddleware, ReceivableValidatorMiddleware)
+      .apply(ReceivableMiddleware)
       .forRoutes(ReceivableController);
   }
 }
