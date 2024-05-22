@@ -1,3 +1,3 @@
 export * from './assignor.controller'
-export * from './receivable.controller'
+export * from './payable.controller'
 export * from './app.controller'

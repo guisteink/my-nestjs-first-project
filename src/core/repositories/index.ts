@@ -1,2 +1,2 @@
 export * from './assignor.repository'
-export * from './receivable.repository'
+export * from './payable.repository'

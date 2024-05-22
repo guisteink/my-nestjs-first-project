@@ -1,2 +1,2 @@
 export * from './assignor.dto';
-export * from './receivable.dto';
+export * from './payable.dto';

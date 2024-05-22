@@ -2,7 +2,7 @@ import { Injectable, NestMiddleware, HttpStatus, HttpException } from '@nestjs/c
 import { Request, Response, NextFunction } from 'express';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import { CreateAssignorDto } from '../core/dtos/assignor.dto';
+import { CreateAssignorDto } from '../../core/dtos/assignor.dto';
 
 @Injectable()
 export class AssignorMiddleware implements NestMiddleware {

@@ -2,15 +2,15 @@ import { Injectable, NestMiddleware, HttpStatus, HttpException } from '@nestjs/c
 import { Request, Response, NextFunction } from 'express';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import { CreateReceivableDto } from '../core/dtos/receivable.dto';
+import { CreatePayableDto } from '../../core/dtos/payable.dto';
 
 @Injectable()
-export class ReceivableMiddleware implements NestMiddleware {
+export class PayableMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     console.log("Passou pelo Receivable middleware");
 
     if (req.method === 'POST') {
-      const createReceivableDto = plainToClass(CreateReceivableDto, req.body);
+      const createReceivableDto = plainToClass(CreatePayableDto, req.body);
       const errors = await validate(createReceivableDto);
       if (errors.length > 0) {
         const validationErrors = errors.map(error => Object.values(error.constraints)).flat();

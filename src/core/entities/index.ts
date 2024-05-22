@@ -1,2 +1,2 @@
 export * from './assignor.entity';
-export * from './receivable.entity';
+export * from './payable.entity';

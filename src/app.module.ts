@@ -2,15 +2,15 @@ import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { PaymentsUseCasesModule } from './use-cases/integrations/payments/payments.module';
 import { AssignorController } from './controllers/assignor.controller';
-import { ReceivableController } from './controllers';
-import { AssignorMiddleware, ReceivableMiddleware } from './midlewares';
+import { PayableController } from './controllers';
+import { AssignorMiddleware, PayableMiddleware } from './midlewares/validators';
 
 @Module({
   imports: [PaymentsUseCasesModule],
   controllers: [
     AppController,
     AssignorController,
-    ReceivableController
+    PayableController
   ],
   providers: [],
 })
@@ -21,7 +21,7 @@ export class AppModule implements NestModule {
       .forRoutes(AssignorController);
 
     consumer
-      .apply(ReceivableMiddleware)
-      .forRoutes(ReceivableController);
+      .apply(PayableMiddleware)
+      .forRoutes(PayableController);
   }
 }
