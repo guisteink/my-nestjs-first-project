@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AssignorRepository } from '../../../core/repositories/assignor.repository'; // Importe o AssignorRepository
+import { AssignorRepository, ReceivableRepository } from '../../../core/repositories';
 
 @Module({
   imports: [],
-  providers: [AssignorRepository], // Forneça o AssignorRepository aqui
-  exports: [AssignorRepository], // Exporte o AssignorRepository para que possa ser acessado por outros módulos
+  providers: [AssignorRepository, ReceivableRepository],
+  exports: [AssignorRepository, ReceivableRepository],
 })
 export class PaymentsUseCasesModule {}

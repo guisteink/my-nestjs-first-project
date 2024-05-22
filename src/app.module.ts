@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { PaymentsUseCasesModule } from './use-cases/integrations/payments/payments.module'; // Importe o PaymentsUseCasesModule
-import { AssignorController } from './controllers/assignor.controller'; // Importe o AssignorController
-
+import { AppController } from './controllers/app.controller';
+import { PaymentsUseCasesModule } from './use-cases/integrations/payments/payments.module';
+import { AssignorController } from './controllers/assignor.controller';
+import { ReceivableController } from './controllers';
 @Module({
-  imports: [PaymentsUseCasesModule], // Importe o PaymentsUseCasesModule aqui
+  imports: [PaymentsUseCasesModule],
   controllers: [
     AppController,
     AssignorController,
+    ReceivableController
   ],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

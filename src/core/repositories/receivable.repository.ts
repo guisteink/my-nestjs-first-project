@@ -4,23 +4,35 @@ import { Receivable } from '../entities/receivable.entity'
 
 @Injectable()
 export class ReceivableRepository implements IGenericRepository<Receivable> {
+  private readonly receivables: Receivable[] = [];
+
   getAll(): Promise<Receivable[]> {
-    throw new Error('Method not implemented.')
+    return Promise.resolve(this.receivables);
   }
 
   get(id: string): Promise<Receivable> {
-    throw new Error('Method not implemented.')
+    const receivable = this.receivables.find(item => item.id === id);
+    return Promise.resolve(receivable);
   }
 
   create(item: Receivable): Promise<Receivable> {
-    throw new Error('Method not implemented.')
+    this.receivables.push(item);
+    return Promise.resolve(item);
   }
 
   delete(item: Receivable): Promise<Receivable> {
-    throw new Error('Method not implemented.')
+    const index = this.receivables.findIndex(receivable => receivable.id === item.id);
+    if (index !== -1) {
+      this.receivables.splice(index, 1);
+    }
+    return Promise.resolve(item);
   }
 
   update(id: string, item: Receivable) {
-    throw new Error('Method not implemented.')
+    const index = this.receivables.findIndex(receivable => receivable.id === id);
+    if (index !== -1) {
+      this.receivables[index] = item;
+    }
+    return Promise.resolve(item);
   }
 }

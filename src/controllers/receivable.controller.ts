@@ -22,7 +22,7 @@ export class ReceivableController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() receivable: Receivable): Promise<void> {
+  async update(@Param('id') id: string, @Body() receivable: Receivable): Promise<any> {
     return this.receivableRepository.update(id, receivable);
   }
 
